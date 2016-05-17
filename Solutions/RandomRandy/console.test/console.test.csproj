@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8B8181EE-356D-4C14-B37A-CEBBDBC67B35}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{5B8E2FE2-C475-43AE-8725-D5AAAF7F4AD2}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JB2.Common.RNG</RootNamespace>
-    <AssemblyName>JB2.Common.RNG</AssemblyName>
+    <RootNamespace>console.test</RootNamespace>
+    <AssemblyName>console.test</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="JB2.Common.Core, Version=0.3.17.23064, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\Solutions\RandomRandy\packages\JB2.Common.Core.0.3.17\lib\JB2.Common.Core.dll</HintPath>
+      <HintPath>..\packages\JB2.Common.Core.0.3.17\lib\JB2.Common.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -44,11 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RNG.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CodeLibraries\common.rng\common.rng.csproj">
+      <Project>{8b8181ee-356d-4c14-b37a-cebbdbc67b35}</Project>
+      <Name>common.rng</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
