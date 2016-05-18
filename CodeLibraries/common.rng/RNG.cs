@@ -63,9 +63,57 @@ namespace JB2.Common
             }
         }
 
-        public static byte Dice(byte numoOfFaces)
+
+        public static ushort Plumber(ushort seed)
         {
-            ushort rnd = JB2.Common.RNG.Randy;
+            int newRandy = seed;
+
+            if (newRandy == 0x560A)
+                newRandy = 0;
+
+            ushort s0 = (ushort)((char)newRandy << 8);
+            s0 = (ushort)(s0 ^ newRandy);
+
+            newRandy = (((s0 & 0xff) << 8) | ((s0 & 0xff00) >> 8));
+
+            s0 = (ushort)((((ushort)(s0 << 8) >> 8) << 1) ^ newRandy);
+
+            ushort s1 = (ushort)((s0 >> 1) ^ 0xff80);
+
+            if ((s0 & 1) == 0)
+            {
+                if (s1 == 0xAA55)
+                    newRandy = 0;
+                else
+                    newRandy = s1 ^ 0x1ff4;
+            }
+            else newRandy = s1 ^ 0x8180;
+
+
+            return (ushort)newRandy;
+        }
+
+        public static List<ushort> Plumber(ushort seed, ushort count)
+        {
+            List<ushort> values = new List<ushort>();
+
+            ushort value = seed;
+            for(ushort i=0;i < count;i++)
+            {
+                value = Plumber(value);
+                values.Add(value);
+            }
+
+            return values;
+        }
+
+        #region Dice
+        public static byte Dice(byte numoOfFaces, ushort randyloop = 0)
+        {
+
+            ushort rnd = 0;
+            for (int i = -1; i < randyloop; i++)
+                rnd = JB2.Common.RNG.Randy;
 
             ushort div = (ushort)(65536 / numoOfFaces);
 
@@ -128,7 +176,15 @@ namespace JB2.Common
             }
         }
 
+        public static byte D100
+        {
+            get
+            {
+                return Dice(100);
+            }
+        }
 
+        #endregion Dice
 
 
     }
