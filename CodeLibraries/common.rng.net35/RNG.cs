@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace JB2.Common
 {
@@ -13,11 +12,11 @@ namespace JB2.Common
 
         public static int ThreadSafe(int min, int max)
         {
-            return ThreadSafeRandom.ThisThreadsRandom.Next(min, max);
+            return new Random().Next(min, max);
         }
         public static int ThreadSafe(int max)
         {
-            return ThreadSafeRandom.ThisThreadsRandom.Next(max);
+            return new Random().Next(max);
         }
 
         public static ushort LastUsedRandy
