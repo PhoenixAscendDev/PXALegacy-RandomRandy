@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JB2.Common.RNG</RootNamespace>
-    <AssemblyName>JB2.Common.RNG.Net2</AssemblyName>
+    <AssemblyName>JB2.Common.RNG</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
