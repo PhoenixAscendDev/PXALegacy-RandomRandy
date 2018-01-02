@@ -63,6 +63,17 @@ namespace JB2.Common
             }
         }
 
+        public static ushort Seed
+        {
+            set
+            {
+                _randy = 0;
+                ushort t;
+                for (int i = -1; i < value; i++)
+                    t = Randy;
+            }
+        }
+
 
         public static ushort Plumber(ushort seed)
         {
@@ -111,16 +122,38 @@ namespace JB2.Common
             return values;
         }
 
+
+        public static string Base10Digit(int length, string format="{0}")
+        {
+            format = !format.Contains("{0}") ? format + "{0}" : format;
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < length; i++)
+            {
+                var rng = JB2.Common.RNG.Dice(10);
+                sb.Append((rng - 1).ToString());
+            }
+
+            return string.Format(format, sb.ToString());
+        }
+            
+
+
         #region Dice
         public static byte Dice(byte numoOfFaces, ushort randyloop = 0)
         {
 
-            ushort rnd = 0;
+            //ushort rnd = seed == null ? JB2.Common.RNG.Randy : (ushort)seed;
+            var rnd = Randy;
             for (int i = -1; i < randyloop; i++)
-                rnd = JB2.Common.RNG.Randy;
+
+                rnd = Randy;
+
+            //Console.WriteLine(rnd);
 
             ushort div = (ushort)(65536 / numoOfFaces);
 
+            div = div == 0 ? rnd : div;
 
             var result = (rnd / div);
             return (byte)(result == 0 ? numoOfFaces : result);

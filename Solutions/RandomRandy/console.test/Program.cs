@@ -14,56 +14,64 @@ namespace console.test
         static void Main(string[] args)
         {
 
-            ushort rng = 0;
-            var count = (ushort)RNG.ThreadSafe(1, 100);
-            Console.WriteLine(count);
-            rng = RNG.Plumber(0,RNG.Dice(100,count )).LastOrDefault();
+
+            //ushort rng = 0;
+            //var count = (ushort)RNG.ThreadSafe(1, 100);
+            //Console.WriteLine(count);
+            //rng = RNG.Plumber(0,RNG.Dice(100,count )).LastOrDefault();
 
 
-            for(int i =0; i < 100;i++)
-            {
-                count = (ushort)RNG.ThreadSafe(1, 100);
-                rng = RNG.Plumber(RNG.Randy,RNG.D100).LastOrDefault();
-                Console.WriteLine(rng);
-            }
-            
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    Console.WriteLine(RNG.Dice(6));
+            //    count = (ushort)RNG.ThreadSafe(1, 100);
+            //    rng = RNG.Plumber(RNG.Randy, RNG.D100).LastOrDefault();
+            //    Console.WriteLine(rng);
+            //}
+
             //for(int i = 0; i < 10; i++)
             //{
             //    rng = JB2.Common.RNG.Plumber(rng);
             //    Console.WriteLine(rng);
             //}
+            JB2.Common.RNG.Seed = (ushort)(DateTime.Now.Ticks % ushort.MaxValue);
+            Stopwatch sw = Stopwatch.StartNew();
+            List<int> values = new List<int>();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 100; i++)
+            {
+                //var rng = JB2.Common.RNG.Dice(10);
+                //sb.Append( (rng-1).ToString());
+                var rng = JB2.Common.RNG.Base10Digit(6);
+                //Console.WriteLine(rng);
+                values.Add(Convert.ToInt32(rng));
+            }
+            sw.Stop();
 
-            //Stopwatch sw = Stopwatch.StartNew();
-            //List<int> values = new List<int>();
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    var rng = JB2.Common.RNG.D20;
-            //    values.Add(rng);
-            //}
-            //sw.Stop();
+            //Console.WriteLine(sb.ToString());
 
-            ////values.Sort();
-            //Dictionary<int, int> counts = new Dictionary<int, int>();
-            //foreach (var i in values)
-            //{
-            //    if (counts.ContainsKey(i))
-            //        counts[i] = counts[i] + 1;
-            //    else
-            //        counts.Add(i, 1);
+            //values.Sort();
+            Dictionary<int, int> counts = new Dictionary<int, int>();
+            foreach (var i in values)
+            {
+                if (counts.ContainsKey(i))
+                    counts[i] = counts[i] + 1;
+                else
+                    counts.Add(i, 1);
 
-            //    Console.WriteLine(i);
-            //}
+                //Console.WriteLine(i);
+            }
 
             //Console.ReadLine();
 
-            //List<int> keys = counts.Keys.ToList();
-            //keys.Sort();
+            List<int> keys = counts.Keys.ToList();
+            keys.Sort();
 
-            //Console.WriteLine("time: " + sw.Elapsed.ToString());
-            //foreach (var key in keys)
-            //{
-            //    Console.WriteLine("[" + key.ToString() + "] = " + counts[key].ToString());
-            //}
+            Console.WriteLine("time: " + sw.Elapsed.ToString());
+            foreach (var key in keys)
+            {
+                Console.WriteLine("[" + key.ToString() + "] = " + counts[key].ToString());
+            }
             //Console.ReadLine();
 
 
