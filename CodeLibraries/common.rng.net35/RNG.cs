@@ -27,6 +27,16 @@ namespace JB2.Common
             }
         }
 
+        public static ushort Seed
+        {
+            set
+            {
+                _randy = 0;
+                ushort t;
+                for (int i = -1; i < value; i++)
+                    t = Randy;
+            }
+        }
 
         public static ushort Randy
         {
@@ -108,6 +118,21 @@ namespace JB2.Common
             }
 
             return values;
+        }
+
+
+        public static string Base10Digit(int length, string format = "{0}")
+        {
+            format = !format.Contains("{0}") ? format + "{0}" : format;
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < length; i++)
+            {
+                var rng = JB2.Common.RNG.Dice(10);
+                sb.Append((rng - 1).ToString());
+            }
+
+            return string.Format(format, sb.ToString());
         }
 
         #region Dice
